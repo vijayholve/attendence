@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Attendance</title>
+</head>
+<body>
+    <h1>Student Attendance</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Mark Attendance</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>
+                    {% if student.attendance_set.filter(date=now|date:"Y-m-d").exists %}
+                        Present
+                    {% else %}
+                        <button onclick="markAttendance({{ student.id }})">Mark Present</button>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        function markAttendance(studentId) {
+            fetch(`/attendance/mark/${studentId}/`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                credentials: 'same-origin'
+            })
+            .then(response => {
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    console.error('Failed to mark attendance.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
