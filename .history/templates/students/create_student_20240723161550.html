@@ -1,0 +1,13 @@
+{% block content %} 
+
+<div>
+<form action="" method="POST">
+{% csrf_token %}
+    <div>
+        {{form}} 
+    </div>
+{% endfor %}
+</form>
+</div>
+{% endblock %}
+    

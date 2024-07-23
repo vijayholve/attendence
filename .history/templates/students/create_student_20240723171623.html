@@ -1,0 +1,17 @@
+{% block content %} 
+
+<div>
+<form action="" method="POST">
+
+{% for form  in forms %}
+    
+{% csrf_token %}
+    <div>
+        {{form}} 
+    </div>
+{% endfor %}00000000000
+<input type="submit" value="Submit">
+</form>
+</div>
+{% endblock %}
+    
