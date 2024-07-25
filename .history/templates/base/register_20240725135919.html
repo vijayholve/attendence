@@ -1,0 +1,13 @@
+<!-- templates/students/register.html -->
+<form method="post">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {% if user_form.user_type.value == '1' %}
+        {{ student_form.as_p }}
+    {% elif user_form.user_type.value == '2' %}
+        {{ teacher_form.as_p }}
+    {% elif user_form.user_type.value == '3' %}
+        {{ admin_form.as_p }}
+    {% endif %}
+    <button type="submit">Register</button>
+</form>
