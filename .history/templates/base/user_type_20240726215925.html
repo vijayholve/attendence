@@ -1,0 +1,13 @@
+<form method="post" action="">
+    {% csrf_token %} 
+{% if user_type == '1' %} 
+        {{ student_form.as_p }}
+{% elif user_type == '2' %}
+        {{ teacher_form.as_p }}
+{% elif user_type== '3' %}
+        {{ admin_form.as_p }}
+        {% else %}
+        {{student_form.as_p}} 
+{% endif %} 
+<input type="submit" value="submit">
+</form>

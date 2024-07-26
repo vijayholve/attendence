@@ -1,0 +1,102 @@
+{% extends "base/main.html" %}
+{% block css_content %}
+{% load  static %}
+<link rel="stylesheet" href="{% static 'students/home.css' %}">
+{% endblock css_content %}
+
+
+{% block content %} 
+
+{% if customuser.is_authenticated %} 
+
+<h3><a href="{% url 'login-page' %}">Login</a></h3>
+<h3><a href="{%url 'register' %}">Register</a></h3>
+<div>
+    <div><a href="{% url 'create-subject' %}">create subject</a></div>
+    {% comment %} <div><a href="{% url 'create-student' %}">create student</a></div> {% endcomment %}
+    {% else %}
+    <h3><a href="{% url 'logout-page'%}">logout page</a></h3>
+    {% endif %}
+    
+    
+</div>
+
+{% if  user_type == 3 %}
+<h2><a href="{% url 'teacher-data' %}">Teacher</a></h2>
+{% comment %} {% else %} {% endcomment %}
+{% comment %} <h1>dont</h1> {% endcomment %}
+{%endif %}
+
+{% if  user_type == 2 or 3 %}
+<h2>{{username}}</h2>
+<div class="">Student Attendance of {{today}}</div>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Student Name</th>
+            <th>Mark Attendance</th>
+            <th>Contact</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student, attendance_exists in student_attendance %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>
+                {% if attendance_exists %}
+                
+                <button onclick="markapsent({{student.id}})">Present</button>
+                {% else %}
+                <button onclick="markAttendance({{ student.id }})">Mark Present</button>
+                {% endif %}
+                </td>
+             <td>{{student.contact}}</td>
+             <td>{{student.user.email}}</td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+    
+    <script>
+        
+        function markAttendance(studentId) {
+            fetch(`/mark/${studentId}/`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                credentials: 'same-origin'
+            })
+            .then(response => {
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    console.error('Failed to mark attendance.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        
+        function markapsent(student_id){
+            fetch(`/apsent/${studentId}/`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                credentials: 'same-origin'
+            })
+            .then(response => {
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    console.error('Failed to mark attendance.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+    {% endblock content %}
