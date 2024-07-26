@@ -1,0 +1,61 @@
+<!-- templates/students/register.html -->
+{% extends "base/main.html" %}
+{% block css_content %}
+
+{% endblock css_content %}\
+
+
+{% block content %} 
+<div class="login_page">
+	<div class="screen">
+		<div class="screen__content">
+			<form class="login" method="POST" action="" enctype="multipart/form-data">
+				{% csrf_token  %}
+				<div>
+				</div>
+                
+                
+                {% for f in user_form %}
+				<div class="login__field">
+					<i class="login__icon fas fa-user"></i>
+                 {{f}}
+				</div>
+				<div class="login__field">
+					<i class="login__icon fas fa-user"></i>
+                    {{f}}				</div>
+                <div class="login__field">
+					<i class="login__icon fas fa-user"></i>
+                    {{f}}				</div>
+				<div class="login__field">
+					<i class="login__icon fas fa-user"></i>
+                    {{f}}				</div>
+				<div class="login__field">
+					<i class="login__icon fas fa-lock"></i>
+                    {{f}}					<span toggle="#password-field" class="fa fa-fw fa-eye field-icon danger toggle-password "></span>
+				</div>
+				<div class="login__field">
+					<i class="login__icon fas fa-lock"></i>
+                    {{f}}				</div>
+				{% include "base/messages.html" %}
+                  
+				<button class="button-85" id="btn1">submit	</button>
+		                 
+			</form>
+			<div>
+				<h2>
+					alredy have an account <a href="{% url 'login-page' %}">login</a>
+				</h2>
+			</div>
+					
+			</div>
+		</div>
+		<div class="screen__background">
+			<span class="screen__background__shape screen__background__shape4"></span>
+			<span class="screen__background__shape screen__background__shape3"></span>		
+			<span class="screen__background__shape screen__background__shape2"></span>
+			<span class="screen__background__shape screen__background__shape1"></span>
+		</div>		
+	</div>
+</div>
+{% endblock content %}
+

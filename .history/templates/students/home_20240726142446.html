@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Attendance</title>
+</head>
+<body>
+
+    <h1><a href="{% url 'login-page' %}">Login</a></h1>
+    <h1><a href="{%url 'register' %}">Register</a></h1>
+    <div>
+        <div><a href="{% url 'create-subject' %}">create subject</a></div>
+        {% comment %} <div><a href="{% url 'create-student' %}">create student</a></div> {% endcomment %}
+
+</div>
+
+{% if  user_type == 2 or 3 %}
+<h1>Student Attendance of {{today}}</h1>
+<h2>{{username}}</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Student Name</th>
+            <th>Mark Attendance</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student, attendance_exists in student_attendance %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>
+                {% if attendance_exists %}
+                
+                <button onclick="markapsent({{student.id}})">Present</button>
+                {% else %}
+                <button onclick="markAttendance({{ student.id }})">Mark Present</button>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+  {% endif %}
+        </tbody>
+    </table>
+    
+    <script>
+        
+        function markAttendance(studentId) {
+            fetch(`/mark/${studentId}/`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                credentials: 'same-origin'
+            })
+            .then(response => {
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    console.error('Failed to mark attendance.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        
+        function markapsent(student_id){
+            fetch(`/apsent/${studentId}/`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                credentials: 'same-origin'
+            })
+            .then(response => {
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    console.error('Failed to mark attendance.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
