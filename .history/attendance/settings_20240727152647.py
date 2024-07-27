@@ -150,24 +150,21 @@ EMAIL_HOST_PASSWORD = 'uoyn xeho visj fblr'
 
 
 import ssl
-
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
-CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
 CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_RESULT_SERIALIZER = "json" 
 CELERY_TASK_SERIALIZER = "json"
-CELERY_RESULT_SERIALIZER = "json"
-CELERY_TIMEZONE = "Asia/Kolkata"
-CELERY_ENABLE_UTC = False
+CELERY_TIMEZONE = "Asia/Kolkata" 
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
+CELERY_ENABLE_UTC =  False
 
 # Retain existing behavior for retrying connections on startup
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 
 CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
-
-# Only include SSL configuration if using SSL
-# CELERY_BROKER_USE_SSL = {
-#     'ssl_cert_reqs': ssl.CERT_NONE  # Adjust based on your security requirements
-# }
+CELERY_BROKER_USE_SSL = {
+    'ssl_cert_reqs': ssl.CERT_NONE  # Adjust based on your security requirements
+}
 
 timezone = 'Asia/Kolkata'
 accept_content = ['json']

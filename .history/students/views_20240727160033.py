@@ -63,7 +63,7 @@ def send_mails_to_teachers(request):
     subject=request.POST.get('subject')  
     mail_text=request.POST.get('content')  
     if request.method == 'POST': 
-        send_mail_to_all_task.delay(subject,mail_text) 
+        sned(subject,mail_text) 
         return redirect('home') 
     content={} 
     return render(request,"students/send_mail.html",content)
@@ -92,7 +92,6 @@ def send_mails_to_students(request,id):
     mail_text=request.POST.get('content')  
     if request.method == 'POST': 
         send_mail_task.delay(id,subject,mail_text) 
-        
         return redirect('home') 
     content={} 
     return render(request,"students/send_mail.html",content)

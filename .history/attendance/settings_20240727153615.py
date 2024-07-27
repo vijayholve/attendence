@@ -158,6 +158,10 @@ CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
 CELERY_TIMEZONE = "Asia/Kolkata"
 CELERY_ENABLE_UTC = False
+import redis
+
+r = redis.Redis(host='127.0.0.1', port=6379, db=0)
+print(r.ping())
 
 # Retain existing behavior for retrying connections on startup
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
@@ -168,6 +172,15 @@ CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 # CELERY_BROKER_USE_SSL = {
 #     'ssl_cert_reqs': ssl.CERT_NONE  # Adjust based on your security requirements
 # }
+
+
+# Retain existing behavior for retrying connections on startup
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+CELERY_BROKER_USE_SSL = {
+    'ssl_cert_reqs': ssl.CERT_NONE  # Adjust based on your security requirements
+}
 
 timezone = 'Asia/Kolkata'
 accept_content = ['json']

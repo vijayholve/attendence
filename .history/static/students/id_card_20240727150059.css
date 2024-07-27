@@ -22,14 +22,13 @@ body {
 .card {
   position: relative;
   width: 300px;
-  height: auto; /* Adjust height to fit content */
+  height: 400px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   border-top: 1px solid rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(15px);
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px; /* Adds space between the card and the button */
-  padding: 20px; /* Adds padding inside the card */
 }
 
 .clg-name{
@@ -47,13 +46,12 @@ body {
 .img-bx {
   position: relative;
   width: 100%;
-  height: auto;
+  height: 60%;
   border-radius: 10px;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0; /* Adds space around the image */
 }
 
 .img-bx img {
@@ -63,8 +61,10 @@ body {
 }
 
 .content {
-  position: relative;
+  position: absolute;
+  bottom: 0;
   width: 100%;
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -76,14 +76,12 @@ body {
 
 .detail {
   text-align: center;
-  margin-top: 20px; /* Adds space above the details section */
 }
 
 .detail h2 {
   color: #444;
   font-size: 1.6em;
   font-weight: bolder;
-  margin-bottom: 10px; /* Adds space below the name */
 }
 
 .detail h2 span {
@@ -91,7 +89,6 @@ body {
   font-size: 0.8em;
   color: #03a9f4;
   font-weight: bold;
-  margin-top: 5px; /* Adds space between spans */
 }
 
 .btn {

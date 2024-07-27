@@ -16,7 +16,7 @@ from .models import Student
 import os
 from django.conf import settings
 from .models import Student
-from .task import send_mail_to_all_task ,send_mail_task
+from task import send_mail_to_all_task ,send_mail_task
 def download_id_card(request, student_id):
     student = Student.objects.get(pk=student_id)
     html_content = render_to_string('students/id_card.html', {'student': student})
@@ -63,7 +63,7 @@ def send_mails_to_teachers(request):
     subject=request.POST.get('subject')  
     mail_text=request.POST.get('content')  
     if request.method == 'POST': 
-        send_mail_to_all_task.delay(subject,mail_text) 
+        teaches_to_send_mail(subject,mail_text) 
         return redirect('home') 
     content={} 
     return render(request,"students/send_mail.html",content)
@@ -91,8 +91,7 @@ def send_mails_to_students(request,id):
     subject=request.POST.get('subject')  
     mail_text=request.POST.get('content')  
     if request.method == 'POST': 
-        send_mail_task.delay(id,subject,mail_text) 
-        
+        student_to_send_mail(id,subject,mail_text) 
         return redirect('home') 
     content={} 
     return render(request,"students/send_mail.html",content)

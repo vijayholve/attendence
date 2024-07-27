@@ -91,7 +91,9 @@ def send_mails_to_students(request,id):
     subject=request.POST.get('subject')  
     mail_text=request.POST.get('content')  
     if request.method == 'POST': 
-        send_mail_task.delay(id,subject,mail_text) 
+        send_mail_task.delay(id,subject,mail_text)      
+
+
         
         return redirect('home') 
     content={} 

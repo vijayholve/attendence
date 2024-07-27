@@ -148,29 +148,3 @@ EMAIL_HOST_USER = 'vijaygholve77v@gmail.com'
 EMAIL_HOST_PASSWORD = 'uoyn xeho visj fblr'  
 
 
-
-import ssl
-
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
-CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
-CELERY_ACCEPT_CONTENT = ["json"]
-CELERY_TASK_SERIALIZER = "json"
-CELERY_RESULT_SERIALIZER = "json"
-CELERY_TIMEZONE = "Asia/Kolkata"
-CELERY_ENABLE_UTC = False
-
-# Retain existing behavior for retrying connections on startup
-CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
-
-CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
-
-# Only include SSL configuration if using SSL
-# CELERY_BROKER_USE_SSL = {
-#     'ssl_cert_reqs': ssl.CERT_NONE  # Adjust based on your security requirements
-# }
-
-timezone = 'Asia/Kolkata'
-accept_content = ['json']
-result_backend = 'redis://127.0.0.1:6379/0'
-result_serializer = 'json'
-task_serializer = 'json' 
