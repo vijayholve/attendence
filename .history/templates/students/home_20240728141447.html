@@ -1,7 +1,7 @@
 {% extends "base/main.html" %}
 {% block css_content %}
 {% load  static %}
-<link rel="stylesheet" href="{% static 'students/home.css' %}">
+<link rel="stylesheet" href="{% static 'students/home.css' %}?v={{time}}">
 {% endblock css_content %}
 
 
@@ -21,7 +21,7 @@
 </div>
 
 
-{% if  user_type == 3 or 2%}
+{% if  user_type == 3 %}
 <h2>hello admin</h2>
 <h2><a href="{% url 'teacher-data' %}">Teacher</a></h2>
 {% comment %} {% else %} {% endcomment %}
@@ -29,13 +29,13 @@
 
 
 <h2>{{username}}</h2>
+{% elif  user_type == 2  %}
 <h2> hello teachers</h2>
 <div class="">Student Attendance of {{today}}</div>
 <div><a href="{%url 'attendance-data'%}">Attendance data</a></div>
 <table border="1">
     <thead>
         <tr>
-            <th>No</th>
             <th>Student Name</th>
             <th>Mark Attendance</th>
             <th>Contact</th>
@@ -46,7 +46,6 @@
     <tbody>
         {% for student, attendance_exists in student_attendance %}
         <tr>
-            <td>{{forloop.counter  }}</td>
             <td>{{ student.name }}</td>
             <td>
                 {% if attendance_exists %}
@@ -65,7 +64,7 @@
 {% elif user_type == 1 %}
 <h3>Hello student</h3>  
 {% endif %}
-
+            
         </tbody>
     </table>
     

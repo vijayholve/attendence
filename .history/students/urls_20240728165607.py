@@ -15,7 +15,7 @@ path('id-card/<str:id>/',views.id_card,name="id-card"),
 path('send-mail-student/<str:id>/',views.send_mails_to_students,name="send-mail-student"),
     path('download-id-card/<int:student_id>/', views.download_id_card, name='download_id_card'),
 path('attendance-data/',views.attendance_data_students,name='attendance-data'),
-] 
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 if settings.DEBUG:  
     urlpatterns+=static(settings.MEDIA_URL,
                         document_root =settings.MEDIA_ROOT)

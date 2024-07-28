@@ -38,11 +38,7 @@ def download_id_card(request, student_id):
     html_with_css = f"<style>{css_content}</style>{html_content}"
     
     # Add image handling
-    if student.profile and student.profile.url.startswith('http'):
-        student_image_url = student.profile.url  # External URL
-    else:
-        student_image_url = request.build_absolute_uri(student.profile.url) if student.profile else ''
-    
+    student_image_url = request.build_absolute_uri(student.profile.url) if student.profile else ''
     html_with_css = html_with_css.replace('{{ student_image }}', student_image_url)
     
     # Create the HTTP response with the HTML content

@@ -8,18 +8,18 @@ table {
   }
   
   thead th:nth-child(1) {
-    width: 4%;
+    width: %;
   }
   thead th:nth-child(2) {
     width: 10%;
   }
   
   thead th:nth-child(3) {
-    width: 08%;
+    width: 10%;
   }
   
   thead th:nth-child(4) {
-    width:  10%;
+    width: 15%;
   }
   
   thead th:nth-child(5) {

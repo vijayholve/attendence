@@ -21,7 +21,7 @@
 </div>
 
 
-{% if  user_type == 3 or 2%}
+{% if  user_type == 3 %}
 <h2>hello admin</h2>
 <h2><a href="{% url 'teacher-data' %}">Teacher</a></h2>
 {% comment %} {% else %} {% endcomment %}
@@ -29,6 +29,7 @@
 
 
 <h2>{{username}}</h2>
+{% elif  user_type == 2  %}
 <h2> hello teachers</h2>
 <div class="">Student Attendance of {{today}}</div>
 <div><a href="{%url 'attendance-data'%}">Attendance data</a></div>

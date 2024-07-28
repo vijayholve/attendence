@@ -15,11 +15,11 @@ table {
   }
   
   thead th:nth-child(3) {
-    width: 08%;
+    width: 0%;
   }
   
   thead th:nth-child(4) {
-    width:  10%;
+    width:  5%;
   }
   
   thead th:nth-child(5) {

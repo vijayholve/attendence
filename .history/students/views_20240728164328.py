@@ -9,10 +9,9 @@ from base.forms import studuntform ,subjectform
 from django.db.models import Q  
 from .seed import teaches_to_send_mail ,student_to_send_mail
 from django.contrib.auth.decorators import login_required
-from django.conf import settings
+# views.py
 from django.http import HttpResponse
 from django.template.loader import render_to_string
-import os
 from .models import Student
 import os
 from django.conf import settings
@@ -25,12 +24,10 @@ from .task import send_mail_to_all_task_teacher ,send_mail_task , send_mail_to_a
 from django import template
 
 
-
 def download_id_card(request, student_id):
     student = get_object_or_404(Student, pk=student_id)
     html_content = render_to_string('students/id_card.html', {'student': student})
     css_path = os.path.join(settings.BASE_DIR, 'static', 'students', 'id_card.css')
-    
     with open(css_path, 'r') as css_file:
         css_content = css_file.read()
     
@@ -38,17 +35,14 @@ def download_id_card(request, student_id):
     html_with_css = f"<style>{css_content}</style>{html_content}"
     
     # Add image handling
-    if student.profile and student.profile.url.startswith('http'):
-        student_image_url = student.profile.url  # External URL
-    else:
-        student_image_url = request.build_absolute_uri(student.profile.url) if student.profile else ''
-    
+    student_image_url = request.build_absolute_uri(student.image.url) if student.image else ''
     html_with_css = html_with_css.replace('{{ student_image }}', student_image_url)
     
     # Create the HTTP response with the HTML content
     response = HttpResponse(html_with_css, content_type='text/html')
     response['Content-Disposition'] = f'attachment; filename="{student.name}_id_card.html"'
-    return response
+    return response 
+
 
 register = template.Library()
 

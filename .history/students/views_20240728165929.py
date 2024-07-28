@@ -24,30 +24,44 @@ from datetime import datetime, timedelta
 from .task import send_mail_to_all_task_teacher ,send_mail_task , send_mail_to_all_task_students
 from django import template
 
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponse
+from PIL import Image, ImageDraw, ImageFont
+import os
 
-
-def download_id_card(request, student_id):
+def download_id_card_jpg(request, student_id):
     student = get_object_or_404(Student, pk=student_id)
-    html_content = render_to_string('students/id_card.html', {'student': student})
-    css_path = os.path.join(settings.BASE_DIR, 'static', 'students', 'id_card.css')
     
-    with open(css_path, 'r') as css_file:
-        css_content = css_file.read()
-    
-    # Inline the CSS content into the HTML content
-    html_with_css = f"<style>{css_content}</style>{html_content}"
-    
-    # Add image handling
-    if student.profile and student.profile.url.startswith('http'):
-        student_image_url = student.profile.url  # External URL
+    # Create a blank image
+    image = Image.new('RGB', (600, 400), (255, 255, 255))
+    draw = ImageDraw.Draw(image)
+
+    # Load the profile image
+    if student.profile:
+        profile_image_path = student.profile.path
     else:
-        student_image_url = request.build_absolute_uri(student.profile.url) if student.profile else ''
+        profile_image_path = os.path.join(settings.MEDIA_ROOT, 'profile_images/default.jpeg')
     
-    html_with_css = html_with_css.replace('{{ student_image }}', student_image_url)
-    
-    # Create the HTTP response with the HTML content
-    response = HttpResponse(html_with_css, content_type='text/html')
-    response['Content-Disposition'] = f'attachment; filename="{student.name}_id_card.html"'
+    profile_image = Image.open(profile_image_path)
+    profile_image = profile_image.resize((150, 150))
+    image.paste(profile_image, (50, 100))
+
+    # Draw text on the image
+    font_path = os.path.join(settings.BASE_DIR, 'static', 'fonts', 'arial.ttf')  # Ensure you have a font file
+    font = ImageFont.truetype(font_path, 40)
+    draw.text((220, 120), student.name, fill='black', font=font)
+    draw.text((220, 180), f"ID: {student.id}", fill='black', font=font)
+    # Add other student details as needed
+
+    # Save the image to a BytesIO object
+    from io import BytesIO
+    image_io = BytesIO()
+    image.save(image_io, 'JPEG')
+    image_io.seek(0)
+
+    # Create the HTTP response with the image content
+    response = HttpResponse(image_io, content_type='image/jpeg')
+    response['Content-Disposition'] = f'attachment; filename="{student.name}_id_card.jpg"'
     return response
 
 register = template.Library()
