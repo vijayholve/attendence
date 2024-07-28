@@ -22,15 +22,13 @@
 
 
 {% if  user_type == 3 %}
-<h2>hello admin</h2>
 <h2><a href="{% url 'teacher-data' %}">Teacher</a></h2>
 {% comment %} {% else %} {% endcomment %}
 {% comment %} <h1>dont</h1> {% endcomment %}
-
+{%endif %}
 
 <h2>{{username}}</h2>
-{% elif  user_type == 2  %}
-<h2> hello teachers</h2>
+{% if  user_type == 3  %}
 <div class="">Student Attendance of {{today}}</div>
 <div><a href="{%url 'attendance-data'%}">Attendance data</a></div>
 <table border="1">
@@ -61,10 +59,7 @@
             </tr>
 {% endfor %}
             <div><a href="{%url 'send-mail-students' %}">send mail students</a></div>
-{% elif user_type == 1 %}
-<h3>Hello student</h3>  
-{% endif %}
-
+            {% endif %}
         </tbody>
     </table>
     

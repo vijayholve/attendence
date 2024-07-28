@@ -104,6 +104,7 @@ def send_mails_to_teachers(request):
 @login_required(login_url='login-page')
 def student_list(request): 
     user=request.user 
+    username=user.username 
     if isinstance(user, CustomUser):    
         username = user.username 
         user_type = user.user_type 
@@ -127,7 +128,7 @@ def send_mails_to_students(request,id):
         
         return redirect('home') 
     content={} 
-    return render(request,"base/send_mail.html",content) 
+    return render(request,"students/send_mail.html",content) 
 
 def send_mails_to_all_students(request): 
     subject=request.POST.get('subject')  
@@ -136,7 +137,7 @@ def send_mails_to_all_students(request):
         send_mail_to_all_task_students.delay(subject,mail_text) 
         return redirect('home') 
     content={} 
-    return render(request,"base/send_mail.html",content)
+    return render(request,"students/send_mail.html",content)
 def check_presenty(id): 
     today=timezone.now().date() 
     student=Student.objects.get(id=id) 

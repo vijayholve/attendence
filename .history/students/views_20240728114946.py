@@ -104,7 +104,7 @@ def send_mails_to_teachers(request):
 @login_required(login_url='login-page')
 def student_list(request): 
     user=request.user 
-    if isinstance(user, CustomUser):    
+=    if isinstance(user, CustomUser):    
         username = user.username 
         user_type = user.user_type 
     students = Student.objects.all() 
