@@ -26,7 +26,7 @@ class hod(models.Model):
 
 
 class Subject(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)2
     # code = models.CharField(max_length=10)
 
     def __str__(self):

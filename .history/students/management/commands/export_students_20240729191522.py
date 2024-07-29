@@ -30,7 +30,7 @@ class Command(BaseCommand):
             # excel file path
             file_path = rf'students\management\attendance_data2.xlsx'
 
-            # export to Excel
+            # Export to Excel
             df.to_excel(file_path, index=False)
 
             self.stdout.write(self.style.SUCCESS(f'Successfully exported attendance data to {file_path}'))

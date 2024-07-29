@@ -27,7 +27,7 @@ class hod(models.Model):
 
 class Subject(models.Model):
     name = models.CharField(max_length=100)
-    # code = models.CharField(max_length=10)
+    code = models.CharField(max_length=10)
 
     def __str__(self):
         return self.name
@@ -77,7 +77,7 @@ class AssignmentSubmission(models.Model):
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     submitted_date = models.DateField()
-    status = models.BooleanField(default=False)
+    file = models.FileField(upload_to='assignments/')
 
     def __str__(self):
         return f"{self.assignment.title} - {self.student.name}"
@@ -91,10 +91,3 @@ class Test(models.Model):
     def __str__(self):
         return self.title 
     
-class TestResult(models.Model):
-    test = models.ForeignKey(Test, on_delete=models.CASCADE)
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    score = models.DecimalField(max_digits=5, decimal_places=2)
-
-    def __str__(self):
-        return f"{self.test.title} - {self.student.name}"

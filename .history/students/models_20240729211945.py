@@ -27,7 +27,7 @@ class hod(models.Model):
 
 class Subject(models.Model):
     name = models.CharField(max_length=100)
-    # code = models.CharField(max_length=10)
+    code = models.CharField(max_length=10)
 
     def __str__(self):
         return self.name
@@ -62,26 +62,6 @@ class Attendance(models.Model):
     subject=models.ForeignKey(Subject,on_delete=models.SET_NULL,null=True ,blank=True ) 
     def __str__(self):
         return f"{self.student.name} - {self.date} - {'Present' if self.present else 'Absent'}"
-class Assignment(models.Model):
-    title = models.CharField(max_length=255)
-    description = models.TextField()
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
-    assigned_date = models.DateField()
-    due_date = models.DateField()
-    assigned_by = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.title
-
-class AssignmentSubmission(models.Model):
-    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    submitted_date = models.DateField()
-    status = models.BooleanField(default=False)
-
-    def __str__(self):
-        return f"{self.assignment.title} - {self.student.name}"
-
 class Test(models.Model):
     title = models.CharField(max_length=255)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
@@ -89,12 +69,12 @@ class Test(models.Model):
     conducted_by = models.ForeignKey(Teacher, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.title 
-    
-class TestResult(models.Model):
-    test = models.ForeignKey(Test, on_delete=models.CASCADE)
+        return self.title
+class AssignmentSubmission(models.Model):
+    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    score = models.DecimalField(max_digits=5, decimal_places=2)
+    submitted_date = models.DateField()
+    file = models.FileField(upload_to='assignments/')
 
     def __str__(self):
-        return f"{self.test.title} - {self.student.name}"
+        return f"{self.assignment.title} - {self.student.name}"

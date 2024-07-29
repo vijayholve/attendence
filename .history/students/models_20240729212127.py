@@ -27,7 +27,7 @@ class hod(models.Model):
 
 class Subject(models.Model):
     name = models.CharField(max_length=100)
-    # code = models.CharField(max_length=10)
+    code = models.CharField(max_length=10)
 
     def __str__(self):
         return self.name
@@ -77,7 +77,7 @@ class AssignmentSubmission(models.Model):
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     submitted_date = models.DateField()
-    status = models.BooleanField(default=False)
+    status = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.assignment.title} - {self.student.name}"
