@@ -26,9 +26,9 @@ class Subject(models.Model):
         return self.name 
 
 class Student(models.Model):
-    roll_no=models.IntegerField(unique=True,null=True,blank=True)
+    rollno=models.
     name = models.CharField(max_length=100) 
-    user = models.OneToOneField(CustomUser, on_delete=models.SET_NULL,null=True,blank=True)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE,null=True,blank=True)
     contact = models.CharField(max_length=150,null=True ,blank=True ) 
     subject=models.ManyToManyField(Subject) 
     profile=models.ImageField(upload_to='profile_images/', default=rf"/profile_images/default.jpeg",

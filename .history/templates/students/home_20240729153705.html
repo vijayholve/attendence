@@ -46,7 +46,7 @@
     <tbody>
         {% for student, attendance_exists in student_attendance %}
         <tr>
-            <td>{{student.roll_no  }}</td>
+            <td>{{student.counter  }}</td>
             <td>{{ student.name }}</td>
             <td>
                 {% if attendance_exists %}

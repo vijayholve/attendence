@@ -8,7 +8,8 @@ from time import sleep
 
 import pandas as pd
 from django.core.management.base import BaseCommand
-from students.models import Student, Subject ,CustomUser
+from students.models import Student, Subject
+from attendance.models import CustomUser
 
 class Command(BaseCommand):
     help = 'Import student data from an Excel file'
@@ -25,14 +26,13 @@ class Command(BaseCommand):
             # Iterate over the rows in the DataFrame and create Student objects
             for index, row in df.iterrows():
                 # Retrieve or create the associated CustomUser object
-                fake=Faker()
-
+                user, created = CustomUser.objects.get_or_create(username=row['username'])
+                
                 # Create the student object
                 student = Student.objects.create(
                     roll_no=row['roll_no'],
                     name=row['name'],
-                    email=fake.email(),
-                    contact=fake.phone_number(),
+                    user=user,
                 )
 
                 # Associate subjects with the student

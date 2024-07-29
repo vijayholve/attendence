@@ -8,7 +8,7 @@ from time import sleep
 
 import pandas as pd
 from django.core.management.base import BaseCommand
-from students.models import Student, Subject ,CustomUser
+from students.models import Student, SubjectCustomUser
 
 class Command(BaseCommand):
     help = 'Import student data from an Excel file'
