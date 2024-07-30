@@ -1,0 +1,13 @@
+{% extends "base/main.html" %}
+{% block content %}
+<div>
+    
+    {% for cls in classes %}
+        <div><a href="{% 'classes-data' cls.id}">{{cls.year}} {{cls.name}} </a></div>
+    {% endfor %}
+        
+</div>
+
+{% endblock content %}
+
+
