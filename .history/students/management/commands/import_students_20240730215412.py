@@ -7,7 +7,8 @@ class Command(BaseCommand):
      
     def handle(self, *args, **kwargs):
         Fake=Faker()
-        file_path = rf"C:\Users\Vijay\Downloads\students_data2.xlsx"
+        file_path = rf""C:\Users\Vijay\Downloads\students_data.xlsx"" 
+        file_path = rf 
         classgroup=ClassGroup.objects.get(id=2)
         try:
             df = pd.read_excel(file_path)

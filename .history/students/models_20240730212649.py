@@ -40,10 +40,9 @@ class Student(models.Model):
     subject=models.ManyToManyField(Subject) 
     profile=models.ImageField(upload_to='profile_images/', default=rf"/profile_images/default.jpeg",
                              null=True,blank=True) 
-    classgroup=models.ForeignKey(ClassGroup,on_delete=models.SET_NULL,null=True,blank=True)
+    classgroup=models.ForeignKey()
     def __str__(self):
         return f"{self.id} is {self.name}" 
-
     
 class Teacher(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE,null=True,blank=True)

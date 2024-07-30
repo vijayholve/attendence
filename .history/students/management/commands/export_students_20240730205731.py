@@ -10,10 +10,12 @@ class Command(BaseCommand):
         try:
             end_date = datetime.now().date()
             start_date = end_date - timedelta(days=6)
+
             students = Student.objects.all()
             # Prepare the attendance data
             data = []
             dates = [start_date + timedelta(days=i) for i in range(7)]
+
             for student in students:
                 row = {
                     'Student ID': student.roll_no,

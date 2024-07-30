@@ -43,7 +43,8 @@ class Student(models.Model):
     classgroup=models.ForeignKey(ClassGroup,on_delete=models.SET_NULL,null=True,blank=True)
     def __str__(self):
         return f"{self.id} is {self.name}" 
-
+    class Meta:
+        ordering=roll
     
 class Teacher(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE,null=True,blank=True)

@@ -14,6 +14,7 @@ class Command(BaseCommand):
             # Prepare the attendance data
             data = []
             dates = [start_date + timedelta(days=i) for i in range(7)]
+
             for student in students:
                 row = {
                     'Student ID': student.roll_no,

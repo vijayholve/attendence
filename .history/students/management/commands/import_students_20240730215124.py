@@ -7,8 +7,8 @@ class Command(BaseCommand):
      
     def handle(self, *args, **kwargs):
         Fake=Faker()
-        file_path = rf"C:\Users\Vijay\Downloads\students_data2.xlsx"
-        classgroup=ClassGroup.objects.get(id=2)
+        file_path = rf"C:\Users\Vijay\Downloads\students.xlsx" 
+        classgroup=ClassGroup.objects.get()
         try:
             df = pd.read_excel(file_path)
 
@@ -16,8 +16,8 @@ class Command(BaseCommand):
                 Student.objects.create(
                     roll_no=row['roll no'],
                     name=row['name'],
-                    contact=Fake.phone_number() ,
-                    classgroup=classgroup,
+                    contact=Fake.phone_number()
+                    classgroup=
                 )
                 
             self.stdout.write(self.style.SUCCESS('Successfully imported student data'))

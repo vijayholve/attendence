@@ -39,11 +39,10 @@ class Student(models.Model):
     contact = models.CharField(max_length=150,null=True ,blank=True ) 
     subject=models.ManyToManyField(Subject) 
     profile=models.ImageField(upload_to='profile_images/', default=rf"/profile_images/default.jpeg",
-                             null=True,blank=True) 
-    classgroup=models.ForeignKey(ClassGroup,on_delete=models.SET_NULL,null=True,blank=True)
+                             null=True,blank=True)
+
     def __str__(self):
         return f"{self.id} is {self.name}" 
-
     
 class Teacher(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE,null=True,blank=True)
@@ -51,8 +50,7 @@ class Teacher(models.Model):
     contact = models.CharField(max_length=15,null=True ,blank=True) 
     city=models.CharField(max_length=200 ,null=True ,blank=True)  
     subject=models.OneToOneField(Subject,on_delete=models.SET_NULL ,blank=True , null=True)
-    class_teacher_of = models.OneToOneField('ClassGroup', on_delete=models.SET_NULL, null=True, blank=True, related_name='class_teacher')
-    
+12345678    
     def __str__(self):
         return self.name 
     
@@ -69,8 +67,7 @@ class Assignment(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     assigned_date = models.DateField()
     due_date = models.DateField()
-    assigned_by = models.ForeignKey(Teacher, on_delete=models.CASCADE) 
-
+    assigned_by = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     def __str__(self):
         return self.title
 
