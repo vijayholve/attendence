@@ -1,0 +1,17 @@
+{% extends "base/main.html" %}
+
+{% block content %}
+<div>
+    
+    {% for ass in assignments  %}
+        <div>{{}}</div>
+        <div>{{ass.title}}</div>
+        <div>{{ass.description}}</div>
+        <div>{{ass.subject}}</div>
+        assigned_date
+        due_date
+        assigned_by
+    {% endfor %}
+        
+</div>
+{% endblock content %}

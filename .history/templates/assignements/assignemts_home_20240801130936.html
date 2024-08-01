@@ -1,0 +1,17 @@
+{% extends "base/main.html" %}
+
+{% block content %}
+<div>
+    
+    {% for ass in assignments  %}
+
+        <div>{{ass.title}}</div>
+        <div><img src="/media/{{ass.description}}" width alt=""></div>
+        <div>{{ass.subject}}</div>
+        <div>{{ass.assigned_date}}</div>
+        <div>{{due_date}}</div>
+    <div>{{ass.assigned_by}}</div>
+    {% endfor %}
+        
+</div>
+{% endblock content %}
