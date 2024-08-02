@@ -3,8 +3,7 @@ from students.models import Test
 from django import forms
 from django.forms import ModelForm ,DateInput
 
-class ExamsForm(ModelForm):
-    class Meta:
+cllass Meta:
         model = Test
         fields = ['title', 'subject', 'conducted_by','classgroup','test_date']
         widgets = {
@@ -14,7 +13,8 @@ class ExamsForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)  # Correctly call the parent class's __init__ method
         for field_name, field in self.fields.items():
-            field.widget.attrs['placeholder'] = field.label
+            field.widget.attrs['placeholder'] = field.labelass ExamsForm(ModelForm):
+    c
     def clean(self):
         cleaned_data = super().clean()
         title = cleaned_data.get('title')

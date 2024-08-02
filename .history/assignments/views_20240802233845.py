@@ -19,6 +19,7 @@ def assignemt_form(request):
     form=AssignmentForm() 
     teacher=Teacher.objects.get(name="hod2")
     if request.method == "POST":
+        due_date=request.POST.get('due_date')
         form=AssignmentForm(request.POST,request.FILES)
         if form.is_valid():
             assign=form.save(commit=False)

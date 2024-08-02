@@ -48,4 +48,4 @@ class ExamsForm(ModelForm):
                 test_date = test_date.date()
             if test_date < date.today():
                 raise forms.ValidationError('Test date must be in the future.')
-        return test_date 
+        return test_date

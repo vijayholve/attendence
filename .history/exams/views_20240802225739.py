@@ -9,7 +9,8 @@ def create_exams(request):
     if request.method == "POST":
         form=ExamsForm(request.POST,request.FILES)
         if form.is_valid():
-            exams=form.save(commit=False)  
+            exams=form.save(commit=False) 
+             
             exams.save()
             # send_mail_to_all_students_for_assignemt.delay(assign.id)  
             return redirect('home') 

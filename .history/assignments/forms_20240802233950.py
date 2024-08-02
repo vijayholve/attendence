@@ -1,12 +1,15 @@
+from django.forms import ModelForm
+from students.models import Assignment 
 from datetime import datetime, date
-from students.models import Test 
 from django import forms
 from django.forms import ModelForm ,DateInput
 
-class ExamsForm(ModelForm):
+
+class AssignmentForm(ModelForm):
+    
     class Meta:
-        model = Test
-        fields = ['title', 'subject', 'conducted_by','classgroup','test_date']
+        model=Assignment
+        fields=['title','description','subject','due_date','classgroup']  
         widgets = {
             'test_date': DateInput(attrs={'type': 'date'}),
         }

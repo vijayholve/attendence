@@ -27,8 +27,8 @@ class ExamsForm(ModelForm):
         if not title:
             self.add_error('title', 'Title is required.')
 
-        # if title and 'exam' not in title.lower():
-        #     self.add_error('title', 'Title must contain the word "exam".')
+        if title and 'exam' not in title.lower():
+            self.add_error('title', 'Title must contain the word "exam".')
 
         return cleaned_data
 
@@ -48,4 +48,4 @@ class ExamsForm(ModelForm):
                 test_date = test_date.date()
             if test_date < date.today():
                 raise forms.ValidationError('Test date must be in the future.')
-        return test_date 
+        return test_date

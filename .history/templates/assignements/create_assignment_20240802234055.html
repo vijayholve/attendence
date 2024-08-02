@@ -2,6 +2,8 @@
 {% block css_content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'assignments/assignment_create.css' %}">
+
+{% block css_content %}
 <meta charset="UTF-8">
     <title>Exam Form</title>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -9,7 +11,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         $(function() {
-            $("#id_due_date").datepicker({
+            $("#id_test_date").datepicker({
                 dateFormat: "yy-mm-dd"
             });
         });

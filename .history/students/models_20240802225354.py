@@ -100,7 +100,8 @@ class Test(models.Model):
     title = models.CharField(max_length=255)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     assigned_date = models.DateField(auto_now_add=True ,null=True,blank=True) 
-    test_date = models.DateTimeField()
+    test_date = models.fieldName = models.DateTimeField(auto_now=False, auto_now_add=False)
+    ()
     conducted_by = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     classgroup=models.ForeignKey(ClassGroup,on_delete=models.SET_NULL, 
                                  null=True,blank=True)  

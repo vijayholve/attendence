@@ -1,14 +1,17 @@
+from django.forms import ModelForm
+from students.models import Assignment 
 from datetime import datetime, date
-from students.models import Test 
 from django import forms
 from django.forms import ModelForm ,DateInput
 
-class ExamsForm(ModelForm):
+
+class AssignmentForm(ModelForm):
+    
     class Meta:
-        model = Test
-        fields = ['title', 'subject', 'conducted_by','classgroup','test_date']
+        model=Assignment
+        fields=['title','description','subject','due_date','classgroup']  
         widgets = {
-            'test_date': DateInput(attrs={'type': 'date'}),
+            'due_date': DateInput(attrs={'type': 'date'}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -19,10 +22,9 @@ class ExamsForm(ModelForm):
         cleaned_data = super().clean()
         title = cleaned_data.get('title')
         test_date = cleaned_data.get('test_date')
-        conducted_by = cleaned_data.get('conducted_by')
 
         if test_date and test_date < date.today():
-            self.add_error('test_date', 'Test date must be in the future.')
+            self.add_error('due_date', 'Test date must be in the future.')
 
         if not title:
             self.add_error('title', 'Title is required.')

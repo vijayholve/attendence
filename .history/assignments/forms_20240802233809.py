@@ -1,16 +1,15 @@
+from django.forms import ModelForm
+from students.models import Assignment 
 from datetime import datetime, date
-from students.models import Test 
 from django import forms
 from django.forms import ModelForm ,DateInput
 
-class ExamsForm(ModelForm):
-    class Meta:
-        model = Test
-        fields = ['title', 'subject', 'conducted_by','classgroup','test_date']
-        widgets = {
-            'test_date': DateInput(attrs={'type': 'date'}),
-        }
 
+class AssignmentForm(ModelForm):
+    
+    class Meta:
+        model=Assignment
+        fields=['title','description','subject','due_date','classgroup'] 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)  # Correctly call the parent class's __init__ method
         for field_name, field in self.fields.items():
