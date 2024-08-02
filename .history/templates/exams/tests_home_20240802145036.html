@@ -1,0 +1,19 @@
+{% extends "base/main.html" %}
+
+{% block content %}
+<div>
+    
+    {% for test in tests  %}
+        <div>{{test.title}}</div>
+        {% comment %} <div><img src="/media/{{ass.description}}" width='200' alt=""></div> {% endcomment %}
+        <div>{{test.subject}}</div>
+        <div>{{test.assigned_date}} to {{ass.due_date}}</div>
+    <div>{{test.classgroup}}</div>
+    <div>{{test.assigned_by}}</div>
+        download
+        </span></a></div>
+    <hr>
+    {% endfor %}
+        
+</div>
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends 'base/main.html' %}
+
+
+{% block content %}
+<form action="" method="POST">
+<div>
+    {% for f in form%}
+    {% csrf_token %}
+    
+    <div>{{f}}</div>
+    {% endfor %}
+    <div class="date"><input type="date" name="due_date"></div>
+    <input type="submit" value="Submit">
+</div>
+</form>
+{% endblock content %}
