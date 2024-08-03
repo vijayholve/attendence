@@ -114,8 +114,3 @@ class TestResult(models.Model):
 
     def __str__(self):
         return f"{self.test.title} - {self.student.name}"
-
-
-class Feedback(models.Model):
-    name=models.CharField(max_length=100)
-    

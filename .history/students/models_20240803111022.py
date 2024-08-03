@@ -117,5 +117,4 @@ class TestResult(models.Model):
 
 
 class Feedback(models.Model):
-    name=models.CharField(max_length=100)
     
