@@ -1,6 +1,0 @@
-from django.urls import path
-from . import views
-
-urlpatterns = [
-    path("create-cpasses",views.home,name="home"),
-] 
