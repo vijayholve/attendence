@@ -1,0 +1,19 @@
+{% extends "base/main.html" %}
+{% block content %}
+<div>
+    
+    {% for cls in classes %}
+        <div><a href="{% url 'attendance-list' pk=cls.id %}">{{cls.year}} {{cls.name}} </a></div>
+    {% endfor %}
+
+<div><a href="{% url 'create-assignment'%}">Create Assignment</a></div>
+<div><a href="{%url 'home-assignemts' %}">All Assignemts</a></div>
+<br>
+<div><a href="{% url 'exam-create' %}">Create Exam</a></div>   
+<br>
+<div><a href="{% url 'exam-home'%}">Exams Home</a></div> 
+</div>
+<div><a href="{% url ''%}"></a></div>
+{% endblock content %}
+
+

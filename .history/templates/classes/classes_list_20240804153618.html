@@ -1,0 +1,16 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+<div> 
+    
+    {% for obj in classes  %}
+        <div>
+            {{obj.name.name}}
+            {{obj.year}}
+        </div>
+        <hr>
+    {% endfor %}
+        
+</div>
+
+{% endblock content %}
