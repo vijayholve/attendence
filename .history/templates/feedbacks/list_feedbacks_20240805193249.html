@@ -1,0 +1,17 @@
+{% extends 'base/main.html' %}
+{% block content %}
+
+<div>
+    <div><a href="{% url 'create-feedback' %}">Create Feedback</a></div>
+
+    <div>ALL FEEDBACKS</div>
+    
+    {% for feedback in feedbacks %}
+        <div>{{feedback.student.username}}</div>
+        <div>{{feedback.teacher}}</div>
+        <div>{{feedback.created_at}}</div>
+          <div>{{feedback.feedback_text}}</div>
+    {% endfor %}
+        
+</div>
+{% endblock content %}

@@ -1,0 +1,13 @@
+.container{
+    background-color: antiquewhite;
+
+}
+.all-feedback{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.box{
+    border: 1px solid black;
+    
+}

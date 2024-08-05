@@ -1,0 +1,22 @@
+{% extends 'base/main.html' %}
+{% block css_content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'feedbacks/list_feedback.css' %}">
+{% endblock css_content %}
+{% block content %}
+{% include "base/navigation_bar.html" %}
+
+<div class="container">
+    <div><a href="{% url 'create-feedback' %}">Create Feedback</a></div>
+
+    <div class="all-feedback">
+    {% for feedback in feedbacks %}
+          
+        <div class="student-name">{{feedback.student.username}}</div>
+        <div class="teacher-name">{{feedback.teacher}}</div>
+        <div class="duration">{{duration|get_item:feedback.id}}</div>
+          <div class="feedback">{{feedback.feedback_text}}</div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock content %}

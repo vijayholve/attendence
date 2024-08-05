@@ -1,0 +1,19 @@
+{% extends "base/main.html" %}
+
+{% block content %}
+
+<div>
+    <div><a href="{% url 'exam-create' %}">Create Exam</a></div>   
+
+    {% for test in tests  %}
+        <div>{{test.title}}</div>
+        {% comment %} <div><img src="/media/{{ass.description}}" width='200' alt=""></div> {% endcomment %}
+        <div>{{test.subject}}</div>
+        <div>{{test.assigned_date}} to {{ass.test_date}}</div>
+    <div>{{test.classgroup}}</div>
+    <div>{{test.conducted_by}}</div>
+    <hr>
+    {% endfor %}
+        
+</div>
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends "base/main.html" %}
+
+{% block content %}
+
+<div>
+    <div><a href="{% url 'create-assignment'%}">Create Assignment</a></div>
+
+    {% for ass in assignments  %}
+        <div>{{ass.title}}</div>
+        {% comment %} <div><img src="/media/{{ass.description}}" width='200' alt=""></div> {% endcomment %}
+        <div>{{ass.subject}}</div>
+        <div>{{ass.assigned_date}} to {{ass.due_date}}</div>
+    <div>{{ass.classgroup}}</div>
+    <div>{{ass.assigned_by}}</div>
+    <div><a href="{% url 'download_file' ass.id %}"><span class="material-symbols-outlined">
+        download
+        </span></a></div>
+    <hr>
+    {% endfor %}
+        
+</div>
+{% endblock content %}
