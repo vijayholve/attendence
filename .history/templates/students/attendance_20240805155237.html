@@ -1,0 +1,148 @@
+{% extends "base/main.html" %}
+{% block css_content %}
+{% load  static %}
+<link rel="stylesheet" href="{% static 'students/home.css' %}">
+{% endblock css_content %}
+
+
+{% block content %} 
+{% if request.user.is_authenticated %}
+    <h3><a href="{% url 'logout-page' %}">Logout</a></h3>
+    <div>
+        <div><a href="{% url 'create-subject' %}">Create Subject</a></div>
+        {# <div><a href="{% url 'create-student' %}">Create Student</a></div> #}
+    </div>
+{% else %}
+    <h3><a href="{% url 'login-page' %}">Login</a></h3>
+    <h3><a href="{% url 'register' %}">Register</a></h3>
+{% endif %}
+
+    
+    
+</div>
+
+
+{% if  user_type == 3 or 2%}
+<h2>hello admin</h2>
+<h2><a href="{% url 'teacher-data' %}">Teacher</a></h2>
+{% comment %} {% else %} {% endcomment %}
+{% comment %} <h1>dont</h1> {% endcomment %}
+
+
+<h2>{{username}}</h2>
+<h2> hello teachers</h2>
+<div class="">Student Attendance of {{today}} of {{classgroup.year}} ||{{classgroup.name}}</div>
+<div><a href="{%url 'attendance-data' classgroup.id%}">Attendance data</a> </div>
+<table border="1">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Student Name</th>
+            <th>Mark Attendance</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>id card</th>
+            <th>Delete Data</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student, attendance_exists in student_attendance %}
+        <tr>
+            <td>{{student.roll_no  }}</td>
+            <td>{{ student.name }}</td>
+            <td>
+                {% if attendance_exists %}
+                
+                <button onclick="markapsent({{student.id}})">Present</button>
+                {% else %}
+                <button onclick="markAttendance({{ student.id }})">Mark Present</button>
+                {% endif %}
+                </td>
+             <td>{{student.contact}}</td>
+             <td><a href="{% url 'send-mail-student' id=student.id %}">{{student.email}}</a></td>
+             <td><a href="{%url  'id-card' id=student.id %}">id card of {{student.name}}</a></td>
+             <td><a href="{% url 'delete-student' student.id  classgroup.id %}">Delete</a></td>
+            </tr>
+{% endfor %}
+            <div><a href="{%url 'send-mail-students' %}">send mail students</a></div>
+{% elif user_type == 1 %}
+<h3>Hello student</h3>  
+{% endif %}
+
+        </tbody>
+    </table>
+    
+    <script>
+        
+        function markAttendance(studentId) {
+            fetch(`/mark/${studentId}/`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                credentials: 'same-origin'
+            })
+            .then(response => {
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    console.error('Failed to mark attendance.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        
+        function markapsent(student_id){
+            fetch(`/apsent/${studentId}/`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                credentials: 'same-origin'
+            })
+            .then(response => {
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    console.error('Failed to mark attendance.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        
+
+
+        $(document).ready(function(){
+            $('.delete-student-btn').click(function(){
+                var studentId = $(this).data('student-id');
+                var classId = $(this).data('class-id');
+                var row = $('#student-row-' + studentId);
+
+                $.ajax({
+                    url: '{% url "delete_student_ajax" %}',
+                    type: 'POST',
+                    data: {
+                        'student_id': studentId,
+                        'class_id': classId,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            row.remove();
+                        } else {
+                            alert(response.error || 'An error occurred.');
+                        }
+                    },
+                    error: function() {
+                        alert('An error occurred.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+    </script>
+    {% endblock content %}
