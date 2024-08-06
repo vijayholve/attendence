@@ -1,0 +1,23 @@
+{% extends "base/main.html" %}
+{% block content %}
+{% include "base/navigation_bar.html" %}
+<div>
+    {% if request.user.is_authenticated %}
+    <h3><a href="{% url 'logout-page' %}">Logout</a></h3>
+    <div>
+        <div><a href="{% url 'create-subject' %}">Create Subject</a></div>
+        {# <div><a href="{% url 'create-student' %}">Create Student</a></div> #}
+    </div>
+{% else %}
+    <h3><a href="{% url 'login-page' %}">Login</a></h3>
+    <h3><a href="{% url 'register' %}">Register</a></h3>
+{% endif %}
+        
+        
+    </div>
+     
+
+
+{% endblock content %}
+
+

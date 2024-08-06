@@ -1,0 +1,8 @@
+{% extends 'base/main.html' %}
+{% block content %}
+
+{% for class in classes %}
+    <div><a href="{% url 'home-assignemts' class_id=class.id %}"></a>{{class.year}}</div>
+{% endfor %}
+    
+{% endblock content %}
