@@ -1,0 +1,33 @@
+{% extends 'base/main.html' %}
+{% block css_content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'librarys/booh_home.css'%}">
+{% endblock css_content %}
+
+{% block content %}
+<div class="container">
+    
+    {% include "base/search.html" %}
+    {% comment %} <form action="" method="GET">
+        <input type="text" name="q" >
+        <input type="submit" value="Submit">
+    </form> {% endcomment %}
+    <h2>Sm Joshi Library<small> Hadpasar Books Data</small></h2>
+    <ul class="responsive-table">
+        <li class="table-header">
+            <div class="col col-1">No</div>
+            <div class="col col-2">Books Name</div>
+            <div class="col col-3"> Author</div>
+            <div class="col col-4"> Year</div>
+        </li>
+        {% for book in books %}
+        <li class="table-row">
+            <div class="col col-1" data-label="Job Id">{{forloop.counter}}</div>
+            <div class="col col-2" data-label="Customer Name">{{book.name}}</div>
+            <div class="col col-3" data-label="Amount">{{book.author}}</div>
+            <div class="col col-4" data-label="Payment Status">{{book.publication_year}}</div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock content %}
