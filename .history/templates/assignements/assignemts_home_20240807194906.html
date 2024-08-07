@@ -1,0 +1,48 @@
+{% extends "base/main.html" %}
+
+{% block content %}
+{% include "base/navigation_bar.html" %}
+<br>
+<div>
+    <div><a href="{% url 'create-assignment'%}">Create Assignment</a></div>
+<br>
+    {% for ass in assignments  %}
+        <div>{{ass.title}}</div>
+        {% comment %} <div><img src="/media/{{ass.description}}" width='200' alt=""></div> {% endcomment %}
+        <div>{{ass.subject}}</div>
+        <div>{{ass.assigned_date}} to {{ass.due_date}}</div>
+    <div>{{ass.classgroup}}</div>
+    <div>{{ass.assigned_by}}</div>
+    <div><a href="{% url 'download_file' ass.id %}"><span class="material-symbols-outlined">
+        download
+        </span></a></div>
+    <hr>
+    <a href="{% url 'dish-order' dish.id %}">
+        <div class="card-container">
+          <div class="card u-clearfix">
+            <div class="card-body">
+              <span class="card-number card-circle subtle">{{dish.id}}</span>
+              <span class="card-author subtle">{{dish.user.username}}</span>
+              <h2 class="card-title">{{dish.dishName}}</h2>
+              <span class="card-description subtle">{{dish.description}}.</span>
+              
+                 <a href="{% url 'dish-order' dish.id %}"> <button class="button-85">Order</button>
+            </div>
+            <a href="{%   url 'dish-order' dish.id %}">
+            <img src="/media/{{dish.dishImage}}/" alt="{{dish.dishImage}}" class="card-media" />
+            </a>
+            <div class="reviews">
+              <div class="Stars" style="--rating:{{review_order|get_item:dish.id}};" aria-label="Rating of this product is {{ rating|default:4|floatformat:1 }} out of 5.">
+                  </div>
+              <span>({{rating_count|get_item:dish.id}} reviews)</span>
+            </div>
+        
+          </div>
+          <div class="card-shadow"></div>
+        </div>
+        
+        
+        {% endfor%}
+        
+</div>
+{% endblock content %}

@@ -1,0 +1,11 @@
+{% extends 'base/main.html' %}
+{% block css_co %}{% endblock css_co %}
+{% block content %}
+{% include "base/navigation_bar.html" %}
+
+{% for class in classes  %}
+    <div><a href="{% url 'all-year-assignements' class_id=class.id %}">{{class}}</a></div>
+    <br>
+{% endfor %}
+    
+{% endblock content %}

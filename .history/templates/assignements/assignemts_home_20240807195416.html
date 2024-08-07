@@ -1,0 +1,42 @@
+{% extends "base/main.html" %}
+{% load static %}
+{% block css_content %}
+<link rel="stylesheet" href="{% static 'assignments/assignments_data.css' %}">
+{% endblock css_content %}
+
+{% block content %}
+{% include "base/navigation_bar.html" %}
+<br>
+<div>
+    <div><a href="{% url 'create-assignment'%}">Create Assignment</a></div>
+<br>
+    {% for ass in assignments  %}
+  
+        <div class="card-container">
+          <div class="card u-clearfix">
+            <div class="card-body">
+              <span class="card-number card-circle subtle">{{forloop.counter}}</span>
+              <span class="card-author subtle">{{ass.subject}}</span>
+              <h2 class="card-title">{{ass.assigned_date}} to {{ass.due_date}}</h2>
+              <span class="card-description subtle">{{ass.classgroup}}.</span>
+              
+                 {% comment %} <a href="{% url 'dish-order' dish.id %}"> <button class="button-85">Order</button> {% endcomment %}
+            </div>
+            {% comment %} <a href="{%   url 'dish-order' dish.id %}">
+            <img src="/media/{{dish.dishImage}}/" alt="{{dish.dishImage}}" class="card-media" />
+            </a> {% endcomment %}
+            <div class="reviews">
+                <a href="{% url 'download_file' ass.id %}"><span class="material-symbols-outlined">
+                    download
+                    </span></a>
+            </div>
+        
+          </div>
+          <div class="card-shadow"></div>
+        </div>
+        
+        
+        {% endfor%}
+        
+</div>
+{% endblock content %}

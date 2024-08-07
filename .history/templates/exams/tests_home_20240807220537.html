@@ -1,0 +1,26 @@
+{% extends "base/main.html" %}
+{% load static %}
+{% block css_content %}
+<link rel="stylesheet" href="{% static 'exams/test_' %}">
+{% endblock css_content %}
+{% block content %}
+{% include "base/navigation_bar.html" %}
+
+<div class="container mt-4">
+    <div class="mb-3">
+        <a href="{% url 'exam-create' %}" class="btn btn-primary">Create Exam</a>
+    </div>   
+
+    {% for test in tests %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ test.title }}</h5>
+                <p class="card-text"><strong>Subject:</strong> {{ test.subject }}</p>
+                <p class="card-text"><strong>Dates:</strong> {{ test.assigned_date }} to {{ test.test_date }}</p>
+                <p class="card-text"><strong>Class Group:</strong> {{ test.classgroup }}</p>
+                <p class="card-text"><strong>Conducted By:</strong> {{ test.conducted_by }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock content %}
