@@ -1,0 +1,116 @@
+/* students/attendance.css */
+
+/* Basic Reset */
+body, h2, h3, p, table, th, td, a, button {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+
+
+/* Links Container */
+.links-container {
+  margin-top: 20px;
+}
+
+.links-container div {
+  margin-bottom: 10px;
+}
+
+.links-container a {
+  font-size: 16px;
+  color: #3498db;
+  text-decoration: none;
+}
+
+.links-container a:hover {
+  text-decoration: underline;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #3498db;
+  color: #fff;
+}
+
+td {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Button Styling */
+button {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+/* Link Styling */
+a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  table {
+      font-size: 14px;
+  }
+
+  th, td {
+      padding: 8px;
+  }
+
+  button {
+      padding: 6px 12px;
+  }
+}

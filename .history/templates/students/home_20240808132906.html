@@ -1,0 +1,29 @@
+{% extends "base/main.html" %}
+{% load static %}
+{% block css_content %}
+<link rel="stylesheet" href="{% static 'students/home.css' %} ">
+{% endblock css_content %}
+{% block content %}
+{% include "base/navigation_bar.html" %}
+<header class="site-header">
+    <div class="logo-container">
+        <img src="{% static 'C:\Users\Vijay\python pro\attendance\media\collage\th.jpeg' %}" alt="S.M. Joshi College Logo" class="logo">
+    </div>
+    <h1>S. M. Joshi College, Hadapsar</h1>
+</header>
+
+<section class="intro">
+    <img src="{% static 'college/college-image.jpg' %}" alt="College Image" class="college-image">
+    <div class="info">
+        <h2>About S. M. Joshi College</h2>
+        <p><strong>Affiliated to:</strong> Savitribai Phule Pune University, Pune I.D.No. PU/PN/SC/069/1986 (Estd. 1986)</p>
+        <p><strong>ISO Certification:</strong> ISO 9001:2015 Certified</p>
+        <p><strong>Principal:</strong> Karmaveer Bhaurao Patil</p>
+        <p><strong>Founder:</strong> S. M. Joshi</p>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <p>&copy; 2024 S. M. Joshi College. All Rights Reserved.</p>
+</footer>
+{% endblock content %}

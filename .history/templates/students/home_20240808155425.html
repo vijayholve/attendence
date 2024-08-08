@@ -1,0 +1,50 @@
+{% extends "base/main.html" %}
+{% load static %}
+{% block css_content %}
+<link rel="stylesheet" href="{% static 'students/home.css' %}?v={{time}}">
+{% endblock css_content %}
+{% block content %}
+{% include "base/navigation_bar.html" %}
+
+<header class="site-header">
+    <div class="logo-container">
+        <img src='/media/collage/th.jpeg'  alt="S.M. Joshi College Logo" class="logo">
+    </div>
+    <h1>S. M. Joshi College, Hadapsar</h1>
+</header>
+
+<section class="intro">
+    <img src="{% static 'college/college-image.jpg' %}" alt="College Image" class="college-image">
+    <div class="info">
+        <h2>About S. M. Joshi College</h2>
+        <p>S. M. Joshi College, established in 1986, is affiliated with Savitribai Phule Pune University. We are an ISO 9001:2015 Certified institution dedicated to academic excellence, personal growth, and professional development.</p>
+        <p>We provide a nurturing environment to foster the potential of every student and help them achieve their dreams.</p>
+    </div>
+</section>
+
+<section class="principal-desk">
+    <h2>Principal’s Desk</h2>
+    <div class="principal-info">
+        <img src="/media/collage\copy-1712119750-SM_JOSHI_NEW-principle.jpg" alt="Principal's Image" class="principal-image">
+        <div class="principal-text">
+            <p>At S.M. Joshi College, we are committed to providing an environment that fosters academic excellence, personal growth, and professional development. Our dedicated faculty, state-of-the-art facilities, and innovative programs ensure that our students are well-prepared to meet the challenges of the future. We believe in nurturing the potential of every student and helping them achieve their dreams.</p>
+            <p class="principal-name">Dr. Karmaveer Bhaurao Patil</p>
+        </div>
+    </div>
+</section>
+
+<section class="recruiters">
+    <h2>Our Major Recruiters</h2>
+    <div class="recruiters-list">
+        <img src='/media/collage/TCS.png'  alt="Recruiter 1">
+        <img src='/media/collage/TechMahindra.png'  alt="Recruiter 2">
+        <img src= '/media/collage/bvg.png' alt="Recruiter 3">
+        <!-- Add more recruiter logos as needed -->
+    </div>
+</section>
+
+<footer class="site-footer">
+    <p>&copy; 2024 S. M. Joshi College. All Rights Reserved.</p>
+</footer>
+
+{% endblock content %}

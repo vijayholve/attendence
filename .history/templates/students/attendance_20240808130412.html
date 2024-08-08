@@ -1,0 +1,88 @@
+{% extends "base/main.html" %}
+{% block css_content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'students/attendance.css' %}?v={{time}}">
+{% endblock css_content %}
+
+{% block content %} 
+{% include "base/navigation_bar.html" %}
+
+    <h2>{{ username }}</h2>
+    <h2> Hello Teachers</h2>
+    <div>Student Attendance of {{ today }} for {{ classgroup.year }} || {{ classgroup.name }}</div>
+    <div><a href="{% url 'attendance-data' classgroup.id %}">Attendance data</a></div>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Student Name</th>
+                <th>Mark Attendance</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>ID Card</th>
+                <th>Delete Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student, attendance_exists in student_attendance %}
+            <tr>
+                <td>{{ student.roll_no }}</td>
+                <td>{{ student.name }}</td>
+                <td>
+                    {% if attendance_exists %}
+                    <button onclick="markAbsent({{ student.id }})">Present</button>
+                    {% else %}
+                    <button onclick="markAttendance({{ student.id }})">Mark Present</button>
+                    {% endif %}
+                </td>
+                <td>{{ student.contact }}</td>
+                <td><a href="{% url 'send-mail-student' student.id %}">{{ student.email }}</a></td>
+                <td><a href="{% url 'id-card' student.id %}">ID card of {{ student.name }}</a></td>
+                <td><a href="{% url 'delete-student' student.id classgroup.id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div><a href="{% url 'send-mail-students' %}">Send mail to students</a></div>
+    <h3>Hello Student</h3>  
+
+<script>
+    function markAttendance(studentId) {
+        fetch(`/mark/${studentId}/`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            credentials: 'same-origin'
+        })
+        .then(response => {
+            if (response.ok) {
+                location.reload();
+            } else {
+                console.error('Failed to mark attendance.');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    function markAbsent(studentId) {
+        fetch(`/absent/${studentId}/`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            credentials: 'same-origin'
+        })
+        .then(response => {
+            if (response.ok) {
+                location.reload();
+            } else {
+                console.error('Failed to mark attendance.');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+</script>
+{% endblock content %}

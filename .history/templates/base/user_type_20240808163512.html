@@ -1,0 +1,56 @@
+{% extends "base/main.html" %}
+{% load static %}
+{% block css_content %}
+<link rel="stylesheet" href="{% static 'assignments/assignment_create.css' %}">
+
+{% endblock css_content %}
+{% block content %}
+<div>{{user_type}}</div>
+<form method="post" action="" enctype="multipart/form-data">
+    {% csrf_token %} 
+    {% if user_type == 'student' %} 
+    <div class="container">
+        <div class="text">
+          Create  Assingment
+        </div>
+        <form class="login" method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for f in form %} 
+                {% if forloop.counter|divisibleby:2 %} 
+                    </div> 
+                    <div class="form-row"> 
+                {% elif forloop.counter == 1 %}
+                    <div class="form-row">
+                {% endif %}
+                
+                <div class="input-data">
+                    {{ f }}
+                    <div class="underline"></div>
+                    {% comment %} <label for="">{{ f.label }}</label> {% endcomment %}
+                </div>
+        
+                {% if forloop.last %}
+                    </div> 
+                {% endif %}
+            {% endfor %}
+            
+            <div class="form-row submit-btn">
+                <div class="input-data">
+                    <div class="inner"></div>
+                    <input type="submit" value="submit">
+                </div>
+            </div>
+        </form>
+        
+        <h2><a href="{% url 'home' %}">Go back</a></h2>
+                    </div>
+    {% elif user_type == 'teacher' %}
+    {{ teacher_form.as_p }}
+    {% elif user_type == 'admin' %} 
+    {{ admin_form.as_p }}
+    {% else %}
+    {{ student_form.as_p }} 
+    {% endif %} 
+    <input type="submit" value="submit">
+</form>
+{% endblock content %}
